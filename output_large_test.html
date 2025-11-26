@@ -1,0 +1,2268 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotización Luxury Lights</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #000000;
+            --accent-color: #D4AF37;
+            /* Gold */
+            --text-color: #333333;
+            --light-gray: #f9f9f9;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            -webkit-print-color-adjust: exact;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background: white;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 60px;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 20px;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .quote-meta {
+            text-align: right;
+            font-size: 14px;
+        }
+
+        .quote-meta h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            margin: 0 0 10px 0;
+            color: var(--primary-color);
+        }
+
+        /* Client Info */
+        .client-info {
+            margin-bottom: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .info-block h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .info-block p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        /* Zones */
+        .zone {
+            margin-bottom: 40px;
+        }
+
+        .zone-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .zone-header span.zone-total {
+            font-family: 'Lato', sans-serif;
+            font-size: 14px;
+            color: var(--accent-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--accent-color);
+            color: var(--primary-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .col-desc {
+            width: 50%;
+        }
+
+        .col-unit {
+            width: 10%;
+            text-align: center;
+        }
+
+        .col-qty {
+            width: 10%;
+            text-align: center;
+        }
+
+        .col-price {
+            width: 15%;
+            text-align: right;
+        }
+
+        .col-total {
+            width: 15%;
+            text-align: right;
+            font-weight: 700;
+        }
+
+        /* Totals */
+        .totals-section {
+            margin-top: 60px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .totals-table {
+            width: 300px;
+        }
+
+        .totals-table .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .totals-table .row.final {
+            border-bottom: none;
+            border-top: 2px solid var(--accent-color);
+            margin-top: 10px;
+            padding-top: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 80px;
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+            border-top: 1px solid var(--border-color);
+            padding-top: 30px;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        .signature {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--accent-color);
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        /* Print Optimization */
+        @media print {
+            @page {
+                margin: 20mm;
+                size: A4;
+            }
+
+            body {
+                background-color: white;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .container {
+                width: 100%;
+                max-width: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            /* Avoid breaking inside a zone if possible, but allow if it's too long */
+            .zone {
+                page-break-inside: avoid;
+                margin-bottom: 30px;
+            }
+
+            /* Ensure table headers repeat on new pages */
+            thead {
+                display: table-header-group;
+            }
+
+            tr {
+                page-break-inside: avoid;
+            }
+
+            /* Force totals to stay together */
+            .totals-section {
+                page-break-inside: avoid;
+            }
+
+            /* Hide browser default headers/footers if possible (user settings depend) */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">LUXURY <span>LIGHTS</span></div>
+            <div class="quote-meta">
+                <h2>COTIZACIÓN</h2>
+                <p><strong>Fecha:</strong> 26/11/2025</p>
+                <p><strong>Ref:</strong> COT-LARGE-001</p>
+            </div>
+        </header>
+
+        <div class="client-info">
+            <div class="info-block">
+                <h3>Cliente</h3>
+                Cliente Corporativo Grande S.A.
+                <p id="client-company">Empresa (Opcional)</p>
+            </div>
+            <div class="info-block" style="text-align: right;">
+                <h3>Emitido Por</h3>
+                <p>Luxury Lights CR</p>
+                <p>ventas@luxurylights.com</p>
+            </div>
+        </div>
+
+        <div id="zones-container">
+            
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 1: Área de Prueba 1</span>
+                    <span class="zone-total">Subtotal Zona: ₡965 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">21</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡210 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">5</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡500 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">46</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡230 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 2: Área de Prueba 2</span>
+                    <span class="zone-total">Subtotal Zona: ₡785 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">19</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡190 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">4</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡400 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">34</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡170 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 3: Área de Prueba 3</span>
+                    <span class="zone-total">Subtotal Zona: ₡1 045 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">54</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡540 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">2</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡200 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">56</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡280 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 4: Área de Prueba 4</span>
+                    <span class="zone-total">Subtotal Zona: ₡720 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">29</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡290 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">2</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡200 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">41</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡205 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 5: Área de Prueba 5</span>
+                    <span class="zone-total">Subtotal Zona: ₡1 015 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">51</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡510 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">2</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡200 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">56</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡280 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 6: Área de Prueba 6</span>
+                    <span class="zone-total">Subtotal Zona: ₡795 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">10</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡100 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">5</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡500 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">34</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡170 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 7: Área de Prueba 7</span>
+                    <span class="zone-total">Subtotal Zona: ₡795 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">38</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡380 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">2</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡200 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">38</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡190 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 8: Área de Prueba 8</span>
+                    <span class="zone-total">Subtotal Zona: ₡455 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">16</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡160 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">2</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡200 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">14</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡70 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 9: Área de Prueba 9</span>
+                    <span class="zone-total">Subtotal Zona: ₡540 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">15</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡150 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡100 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">53</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡265 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 10: Área de Prueba 10</span>
+                    <span class="zone-total">Subtotal Zona: ₡665 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">28</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡280 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">3</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡300 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">12</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡60 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 11: Área de Prueba 11</span>
+                    <span class="zone-total">Subtotal Zona: ₡915 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">39</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡390 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">4</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡400 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">20</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡100 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 12: Área de Prueba 12</span>
+                    <span class="zone-total">Subtotal Zona: ₡780 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">32</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡320 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">3</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡300 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">27</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡135 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 13: Área de Prueba 13</span>
+                    <span class="zone-total">Subtotal Zona: ₡1 075 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">29</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡290 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">5</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡500 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">52</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡260 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 14: Área de Prueba 14</span>
+                    <span class="zone-total">Subtotal Zona: ₡835 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">43</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡430 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">2</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡200 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">36</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡180 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 15: Área de Prueba 15</span>
+                    <span class="zone-total">Subtotal Zona: ₡595 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">19</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡190 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">2</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡200 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">36</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡180 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 16: Área de Prueba 16</span>
+                    <span class="zone-total">Subtotal Zona: ₡650 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">25</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡250 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">3</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡300 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">15</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡75 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 17: Área de Prueba 17</span>
+                    <span class="zone-total">Subtotal Zona: ₡635 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">27</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡270 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡100 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">48</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡240 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 18: Área de Prueba 18</span>
+                    <span class="zone-total">Subtotal Zona: ₡1 090 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">41</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡410 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">4</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡400 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">51</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡255 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 19: Área de Prueba 19</span>
+                    <span class="zone-total">Subtotal Zona: ₡735 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">32</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡320 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡100 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">58</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡290 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 20: Área de Prueba 20</span>
+                    <span class="zone-total">Subtotal Zona: ₡595 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">18</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡180 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">3</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡300 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">18</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡90 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 21: Área de Prueba 21</span>
+                    <span class="zone-total">Subtotal Zona: ₡500 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">20</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡200 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">2</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡200 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">15</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡75 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 22: Área de Prueba 22</span>
+                    <span class="zone-total">Subtotal Zona: ₡1 180 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">52</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡520 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">4</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡400 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">47</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡235 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 23: Área de Prueba 23</span>
+                    <span class="zone-total">Subtotal Zona: ₡1 090 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">51</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡510 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">3</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡300 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">51</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡255 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 24: Área de Prueba 24</span>
+                    <span class="zone-total">Subtotal Zona: ₡980 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">58</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡580 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">2</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡200 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">35</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡175 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 25: Área de Prueba 25</span>
+                    <span class="zone-total">Subtotal Zona: ₡960 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">24</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡240 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">4</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡400 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">59</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡295 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 26: Área de Prueba 26</span>
+                    <span class="zone-total">Subtotal Zona: ₡1 055 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">44</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡440 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">3</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡300 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">58</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡290 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 27: Área de Prueba 27</span>
+                    <span class="zone-total">Subtotal Zona: ₡970 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">31</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡310 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">4</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡400 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">47</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡235 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 28: Área de Prueba 28</span>
+                    <span class="zone-total">Subtotal Zona: ₡460 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">13</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡130 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡100 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">41</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡205 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 29: Área de Prueba 29</span>
+                    <span class="zone-total">Subtotal Zona: ₡440 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">11</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡110 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡100 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">41</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡205 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="zone">
+                <div class="zone-header">
+                    <span>Zona 30: Área de Prueba 30</span>
+                    <span class="zone-total">Subtotal Zona: ₡1 095 000,00</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-desc">Descripción</th>
+                            <th class="col-unit">Unidad</th>
+                            <th class="col-qty">Cant.</th>
+                            <th class="col-price">Precio Unit.</th>
+                            <th class="col-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr>
+                    <td class="col-desc">
+                        <strong>Perfil Gypsum</strong><br>
+                        <span style="color: #666; font-size: 12px;">Perfil de aluminio para empotrar</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">45</td>
+                    <td class="col-price">₡10 000,00</td>
+                    <td class="col-total">₡450 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Fuente de Poder</strong><br>
+                        <span style="color: #666; font-size: 12px;">MeanWell 24V 300W</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">4</td>
+                    <td class="col-price">₡100 000,00</td>
+                    <td class="col-total">₡400 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Tira LED COB</strong><br>
+                        <span style="color: #666; font-size: 12px;">3000K 10W/m</span>
+                    </td>
+                    <td class="col-unit">m</td>
+                    <td class="col-qty">44</td>
+                    <td class="col-price">₡5 000,00</td>
+                    <td class="col-total">₡220 000,00</td>
+                </tr>
+            
+                <tr>
+                    <td class="col-desc">
+                        <strong>Controlador</strong><br>
+                        <span style="color: #666; font-size: 12px;">Dimmer WiFi</span>
+                    </td>
+                    <td class="col-unit">unid</td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">₡25 000,00</td>
+                    <td class="col-total">₡25 000,00</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+        </div>
+
+        <div class="totals-section">
+            <div class="totals-table">
+                <div class="row">
+                    <span>Subtotal</span>
+                    ₡24 415 000,00
+                </div>
+                <div class="row">
+                    <span>IVA (13%)</span>
+                    ₡3 173 950,00
+                </div>
+                <div class="row final">
+                    <span>Total</span>
+                    ₡27 588 950,00
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="signature">Iluminando tus espacios con elegancia</div>
+            <p>Gracias por su preferencia.</p>
+            <p>Este documento es una cotización preliminar y está sujeta a cambios.</p>
+        </footer>
+    </div>
+</body>
+
+</html>

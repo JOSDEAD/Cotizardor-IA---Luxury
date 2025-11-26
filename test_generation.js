@@ -1,0 +1,32 @@
+const fs = require('fs');
+const { generateQuotationHTML } = require('./generate_quote');
+
+const template = fs.readFileSync('./template.html', 'utf8');
+
+const mockData = {
+    clientName: "Arquitecto Roberto Mendoza",
+    reference: "COT-2025-882",
+    date: "26/11/2025",
+    zones: [
+        {
+            name: "Zona 1: Sala de Estar",
+            items: [
+                { name: "Perfil Gypsum", description: "Perfil de aluminio para empotrar en cielo raso", unit: "m", qty: 30, price: 12500, tax: 0.13 },
+                { name: "Fuente de Poder", description: "MeanWell LRS-350-24", unit: "unid", qty: 2, price: 45000, tax: 0.13 },
+                { name: "Tira LED COB", description: "4000K Luz Neutra Alta Eficiencia", unit: "m", qty: 30, price: 8500, tax: 0.13 }
+            ]
+        },
+        {
+            name: "Zona 2: Dormitorio Principal",
+            items: [
+                { name: "Perfil Esquinero", description: "Perfil 45 grados para mueble", unit: "m", qty: 12, price: 9000, tax: 0.13 },
+                { name: "Sensor de Movimiento", description: "Sensor PIR para closet", unit: "unid", qty: 3, price: 15000, tax: 0.13 }
+            ]
+        }
+    ]
+};
+
+const finalHtml = generateQuotationHTML(mockData, template);
+
+fs.writeFileSync('./output_test.html', finalHtml);
+console.log("Test generated: output_test.html");

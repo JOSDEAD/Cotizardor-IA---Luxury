@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotización Luxury Lights</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #000000;
+            --accent-color: #D4AF37;
+            /* Gold */
+            --text-color: #333333;
+            --light-gray: #f9f9f9;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            -webkit-print-color-adjust: exact;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background: white;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 60px;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 20px;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .quote-meta {
+            text-align: right;
+            font-size: 14px;
+        }
+
+        .quote-meta h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            margin: 0 0 10px 0;
+            color: var(--primary-color);
+        }
+
+        /* Client Info */
+        .client-info {
+            margin-bottom: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .info-block h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .info-block p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        /* Zones */
+        .zone {
+            margin-bottom: 40px;
+        }
+
+        .zone-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .zone-header span.zone-total {
+            font-family: 'Lato', sans-serif;
+            font-size: 14px;
+            color: var(--accent-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--accent-color);
+            color: var(--primary-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .col-desc {
+            width: 50%;
+        }
+
+        .col-unit {
+            width: 10%;
+            text-align: center;
+        }
+
+        .col-qty {
+            width: 10%;
+            text-align: center;
+        }
+
+        .col-price {
+            width: 15%;
+            text-align: right;
+        }
+
+        .col-total {
+            width: 15%;
+            text-align: right;
+            font-weight: 700;
+        }
+
+        /* Totals */
+        .totals-section {
+            margin-top: 60px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .totals-table {
+            width: 300px;
+        }
+
+        .totals-table .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .totals-table .row.final {
+            border-bottom: none;
+            border-top: 2px solid var(--accent-color);
+            margin-top: 10px;
+            padding-top: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 80px;
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+            border-top: 1px solid var(--border-color);
+            padding-top: 30px;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        .signature {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--accent-color);
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        /* Print Optimization */
+        @media print {
+            @page {
+                margin: 20mm;
+                size: A4;
+            }
+
+            body {
+                background-color: white;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .container {
+                width: 100%;
+                max-width: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            /* Avoid breaking inside a zone if possible, but allow if it's too long */
+            .zone {
+                page-break-inside: avoid;
+                margin-bottom: 30px;
+            }
+
+            /* Ensure table headers repeat on new pages */
+            thead {
+                display: table-header-group;
+            }
+
+            tr {
+                page-break-inside: avoid;
+            }
+
+            /* Force totals to stay together */
+            .totals-section {
+                color: var(--primary-color);
+                margin-bottom: 30px;
+                text-align: center;
+            }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">LUXURY <span>LIGHTS</span></div>
+            <div class="quote-meta">
+                <h2>COTIZACIÓN</h2>
+                <p><strong>Fecha:</strong> <span id="date">--/--/----</span></p>
+                <p><strong>Ref:</strong> <span id="ref">#0000</span></p>
+            </div>
+        </header>
+
+        <div class="client-info">
+            <div class="info-block">
+                <h3>Cliente</h3>
+                <p id="client-name">Nombre del Cliente</p>
+                <p id="client-company">Empresa (Opcional)</p>
+            </div>
+            <div class="info-block" style="text-align: right;">
+                <h3>Emitido Por</h3>
+                <p>Luxury Lights CR</p>
+                <p>ventas@luxurylights.com</p>
+            </div>
+        </div>
+
+        <div id="zones-container">
+            <!-- Zones will be injected here -->
+        </div>
+
+        <div class="totals-section">
+            <div class="totals-table">
+                <div class="row">
+                    <span>Subtotal</span>
+                    <span id="subtotal">₡0</span>
+                </div>
+                <div class="row">
+                    <span>IVA (13%)</span>
+                    <span id="tax">₡0</span>
+                </div>
+                <div class="row final">
+                    <span>Total</span>
+                    <span id="total">₡0</span>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="signature">Iluminando tus espacios con elegancia</div>
+            <p>Gracias por su preferencia.</p>
+            <p>Este documento es una cotización preliminar y está sujeta a cambios.</p>
+        </footer>
+
+        <!-- Charts Section (Addendum) -->
+        <div class="page-break"></div>
+        <div class="chart-container">
+            <h2 class="chart-title">Análisis de Presupuesto por Zona</h2>
+            <div id="chart-placeholder">
+                <!-- SVG Chart will be injected here -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

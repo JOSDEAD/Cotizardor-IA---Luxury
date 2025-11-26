@@ -1,0 +1,52 @@
+{
+  "quotationNumber": "1234",
+  "date": "2025-11-26",
+  "validUntil": "2025-12-26",
+  "customer": {
+    "name": "Cliente Ejemplo",
+    "address": "Dirección Ejemplo, San José, Costa Rica",
+    "phone": "12345678"
+  },
+  "projectDescription": "Instalación de iluminación LED en residencia principal, dividida por zonas.",
+  "zones": [
+    {
+      "name": "Zona 1 - Sala Principal",
+      "items": [
+        {
+          "description": "Perfil gypsum 30 m",
+          "quantity": 30,
+          "price": 28900,
+          "total": 867000
+        },
+        {
+          "description": "Fuente de poder 200W",
+          "quantity": 2,
+          "price": 23000,
+          "total": 46000
+        }
+      ]
+    },
+    {
+      "name": "Zona 2 - Cocina",
+      "items": [
+        {
+          "description": "Cinta LED COB 4000K 5m",
+          "quantity": 3,
+          "price": 15000,
+          "total": 45000
+        },
+        {
+          "description": "Perfil Aluminio Esquinero",
+          "quantity": 5,
+          "price": 8500,
+          "total": 42500
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "subtotal": 1000500,
+    "tax": 130065,
+    "total": 1130565
+  }
+}

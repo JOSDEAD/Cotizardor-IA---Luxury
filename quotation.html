@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotización - Luxury Lights</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 40px;
+            color: #333;
+            background-color: #fff;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .logo span {
+            display: block;
+        }
+
+        .quotation-title {
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: right;
+        }
+
+        .meta-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .meta-block {
+            width: 48%;
+        }
+
+        .customer-info {
+            margin-bottom: 40px;
+            font-size: 14px;
+        }
+
+        .customer-name {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .divider {
+            height: 10px;
+            background-color: #000;
+            margin-bottom: 20px;
+        }
+
+        .project-description {
+            display: flex;
+            margin-bottom: 40px;
+            font-size: 14px;
+        }
+
+        .project-label {
+            font-weight: 700;
+            width: 150px;
+            flex-shrink: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        th {
+            text-align: left;
+            padding: 10px 0;
+            border-bottom: 1px solid #000;
+            font-weight: 700;
+        }
+
+        td {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .zone-header {
+            background-color: #f9f9f9;
+            font-weight: 700;
+            padding: 10px;
+        }
+        
+        .zone-header td {
+            padding-left: 10px;
+        }
+
+        .totals {
+            width: 300px;
+            margin-left: auto;
+            font-size: 14px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+        }
+
+        .grand-total {
+            background-color: #000;
+            color: #fff;
+            padding: 10px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        footer {
+            margin-top: 60px;
+            border-top: 2px solid #000;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .footer-left {
+            width: 60%;
+        }
+
+        .footer-right {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <span>LUXURY</span>
+            <span>LIGHTS</span>
+            <span style="font-size: 10px; font-weight: 400; letter-spacing: 0;">ILUMINACIÓN PROFESIONAL</span>
+        </div>
+        <div class="quotation-title">
+            COTIZACIÓN
+        </div>
+    </header>
+
+    <div class="meta-info">
+        <div class="meta-block">
+            <strong>Cotización No:</strong> #1234<br>
+            <!-- Customer ID could go here if available -->
+        </div>
+        <div class="meta-block text-right">
+            <strong>Fecha:</strong> 2025-11-26<br>
+            <strong>Válido hasta:</strong> 2025-12-26
+        </div>
+    </div>
+
+    <div class="customer-info">
+        <div class="customer-name">Cliente Ejemplo</div>
+        <div>Dirección Ejemplo, San José, Costa Rica</div>
+        <div>12345678</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="project-description">
+        <div class="project-label">Descripción del Proyecto</div>
+        <div>Instalación de iluminación LED en residencia principal, dividida por zonas.</div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 50%;">Descripción</th>
+                <th class="text-right" style="width: 10%;">Cant.</th>
+                <th class="text-right" style="width: 20%;">Precio</th>
+                <th class="text-right" style="width: 20%;">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+                <tr class="zone-header">
+                    <td colspan="4">Zona 1 - Sala Principal</td>
+                </tr>
+                
+                    <tr>
+                        <td>Perfil gypsum 30 m</td>
+                        <td class="text-right">30</td>
+                        <td class="text-right">₡28,900</td>
+                        <td class="text-right">₡867,000</td>
+                    </tr>
+                
+                    <tr>
+                        <td>Fuente de poder 200W</td>
+                        <td class="text-right">2</td>
+                        <td class="text-right">₡23,000</td>
+                        <td class="text-right">₡46,000</td>
+                    </tr>
+                
+            
+                <tr class="zone-header">
+                    <td colspan="4">Zona 2 - Cocina</td>
+                </tr>
+                
+                    <tr>
+                        <td>Cinta LED COB 4000K 5m</td>
+                        <td class="text-right">3</td>
+                        <td class="text-right">₡15,000</td>
+                        <td class="text-right">₡45,000</td>
+                    </tr>
+                
+                    <tr>
+                        <td>Perfil Aluminio Esquinero</td>
+                        <td class="text-right">5</td>
+                        <td class="text-right">₡8,500</td>
+                        <td class="text-right">₡42,500</td>
+                    </tr>
+                
+            
+        </tbody>
+    </table>
+
+    <div class="totals">
+        <div class="total-row">
+            <span>Subtotal</span>
+            <span>₡1,000,500</span>
+        </div>
+        <div class="total-row">
+            <span>I.V.A. (13%)</span>
+            <span>₡130,065</span>
+        </div>
+        <div class="total-row grand-total">
+            <span>Total</span>
+            <span>₡1,130,565</span>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-left">
+            <p>Si tiene alguna pregunta sobre esta cotización, por favor contáctenos.</p>
+            <p><strong>Luxury Lights</strong><br>info@luxurylights.com | +506 8888-8888</p>
+        </div>
+        <div class="footer-right">
+            <p>Gracias por su preferencia!</p>
+        </div>
+    </footer>
+
+</body>
+</html>

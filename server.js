@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const axios = require('axios');
 const { generateQuotationHTML } = require('./generate_quote');
 
 const app = express();
@@ -59,22 +60,19 @@ app.post('/api/quote', async (req, res) => {
 
         console.log('Sending request to Gotenberg:', gotenbergUrl);
 
-        const response = await fetch(`${gotenbergUrl}/forms/chromium/convert/html`, {
-            method: 'POST',
-            body: form,
-            headers: form.getHeaders()
-        });
+        const response = await axios.post(
+            `${gotenbergUrl}/forms/chromium/convert/html`,
+            form,
+            {
+                headers: form.getHeaders(),
+                responseType: 'arraybuffer'
+            }
+        );
 
         console.log('Gotenberg response status:', response.status);
 
-        if (!response.ok) {
-            const errorText = await response.text();
-            console.error('Gotenberg error response:', errorText);
-            throw new Error(`Gotenberg error: ${response.status} ${response.statusText}`);
-        }
-
-        // 3. Get PDF buffer from Gotenberg
-        const pdfBuffer = await response.arrayBuffer();
+        // 3. Get PDF buffer from response
+        const pdfBuffer = response.data;
 
         // 4. Send PDF to client
         res.set({

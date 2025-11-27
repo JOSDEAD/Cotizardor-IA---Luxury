@@ -21,6 +21,11 @@ try {
     process.exit(1);
 }
 
+// Health check endpoint
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'ok' });
+});
+
 // POST /api/quote
 app.post('/api/quote', async (req, res) => {
     try {
@@ -35,8 +40,17 @@ app.post('/api/quote', async (req, res) => {
 
         // 2. Launch Puppeteer
         const browser = await puppeteer.launch({
-            args: ['--no-sandbox', '--disable-setuid-sandbox'], // Required for some container environments
-            headless: 'new'
+            headless: 'new',
+            args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage',
+                '--disable-accelerated-2d-canvas',
+                '--no-first-run',
+                '--no-zygote',
+                '--disable-gpu'
+            ],
+            executablePath: '/usr/bin/google-chrome-stable'
         });
         const page = await browser.newPage();
 
@@ -72,6 +86,16 @@ app.post('/api/quote', async (req, res) => {
     }
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+console.log('=================================');
+console.log('Cotizador API Server');
+console.log('=================================');
+console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+console.log(`Port: ${PORT}`);
+console.log(`Template loaded: ${templateHtml.length} characters`);
+console.log('=================================');
+
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`✓ Server running on http://0.0.0.0:${PORT}`);
+    console.log(`✓ Health check: http://0.0.0.0:${PORT}/health`);
+    console.log(`✓ API endpoint: http://0.0.0.0:${PORT}/api/quote`);
 });

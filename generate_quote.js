@@ -1,71 +1,83 @@
-// Mock Data Structure (Example of what n8n should pass to this function)
-/*
-const inputData = {
-    clientName: "Juan Pérez",
-    reference: "COT-2023-001",
-    date: "26/11/2025",
-    zones: [
-        {
-            name: "Zona 1: Sala Principal",
-            items: [
-                { name: "Perfil Gypsum", description: "Perfil de aluminio para empotrar", unit: "m", qty: 30, price: 10000, tax: 0.13 },
-                { name: "Fuente de Poder", description: "MeanWell 24V 300W", unit: "unid", qty: 2, price: 100000, tax: 0.13 }
-            ]
-        },
-        {
-            name: "Zona 2: Cocina",
-            items: [
-                { name: "Tira LED COB", description: "3000K 10W/m", unit: "m", qty: 15, price: 5000, tax: 0.13 }
-            ]
-        }
-    ]
-};
-*/
-
 // Function to format currency (Colones)
 const formatCurrency = (amount) => {
     return new Intl.NumberFormat('es-CR', { style: 'currency', currency: 'CRC' }).format(amount);
 };
 
-// Function to generate a simple SVG Bar Chart
+// Function to generate a SVG Pie/Donut Chart
 function generateSVGChart(zones) {
-    // Calculate totals per zone
+    // Calculate totals per zone (considering discounts)
     const data = zones.map(z => {
-        const total = z.items.reduce((sum, item) => sum + (item.qty * item.price), 0);
+        const total = z.items.reduce((sum, item) => {
+            const sub = item.qty * item.price;
+            const disc = sub * (item.discount || 0);
+            return sum + (sub - disc);
+        }, 0);
         return { name: z.name.split(':')[0], full_name: z.name, value: total };
     });
 
-    const maxValue = Math.max(...data.map(d => d.value));
-    const chartHeight = data.length * 60 + 50; // Dynamic height based on number of zones
-    const chartWidth = 600;
-    const barHeight = 40;
-    const labelWidth = 150;
-    const maxBarWidth = chartWidth - labelWidth - 100; // Reserve space for labels and values
+    const totalValue = data.reduce((acc, cur) => acc + cur.value, 0);
+    let startAngle = 0;
 
-    let svgContent = '';
+    // Gold/Black Palette
+    const colors = ['#D4AF37', '#000000', '#333333', '#555555', '#777777', '#C5A028'];
 
-    data.forEach((d, index) => {
-        const barWidth = (d.value / maxValue) * maxBarWidth;
-        const y = index * 60 + 20;
+    let paths = '';
+    let legends = '';
 
-        // Bar Background
-        svgContent += `<rect x="${labelWidth}" y="${y}" width="${maxBarWidth}" height="${barHeight}" fill="#f0f0f0" rx="4" />`;
+    // SVG Config
+    const width = 600;
+    const height = 400;
+    const cx = 200; // Center X of pie
+    const cy = 200; // Center Y
+    const r = 120;  // Radius
 
-        // Actual Bar (Gold)
-        svgContent += `<rect x="${labelWidth}" y="${y}" width="${barWidth}" height="${barHeight}" fill="#D4AF37" rx="4">
-            <animate attributeName="width" from="0" to="${barWidth}" dur="1s" fill="freeze" />
-        </rect>`;
+    data.forEach((slice, i) => {
+        if (slice.value === 0) return;
 
-        // Label (Zone Name)
-        svgContent += `<text x="${labelWidth - 10}" y="${y + 25}" font-family="Lato, sans-serif" font-size="14" text-anchor="end" fill="#333">${d.name}</text>`;
+        const angle = (slice.value / totalValue) * 2 * Math.PI;
+        const endAngle = startAngle + angle;
 
-        // Value Label
-        svgContent += `<text x="${labelWidth + barWidth + 10}" y="${y + 25}" font-family="Lato, sans-serif" font-size="14" fill="#333" font-weight="bold">${formatCurrency(d.value)}</text>`;
+        // Calculate coordinates
+        const x1 = cx + r * Math.sin(startAngle);
+        const y1 = cy - r * Math.cos(startAngle);
+        const x2 = cx + r * Math.sin(endAngle);
+        const y2 = cy - r * Math.cos(endAngle);
+
+        // Large arc flag
+        const largeArc = angle > Math.PI ? 1 : 0;
+
+        // Path command
+        // If it's a full circle (single item), draw a circle instead
+        let d;
+        if (Math.abs(angle - 2 * Math.PI) < 0.001) {
+            d = `M ${cx} ${cy - r} A ${r} ${r} 0 1 1 ${cx} ${cy + r} A ${r} ${r} 0 1 1 ${cx} ${cy - r} Z`;
+        } else {
+            d = `M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${largeArc} 1 ${x2} ${y2} Z`;
+        }
+
+        const color = colors[i % colors.length];
+
+        paths += `<path d="${d}" fill="${color}" stroke="white" stroke-width="2" />`;
+
+        // Legend
+        const percentage = ((slice.value / totalValue) * 100).toFixed(1) + '%';
+        legends += `
+            <g transform="translate(380, ${100 + (i * 30)})">
+                <rect width="15" height="15" fill="${color}" rx="3" />
+                <text x="25" y="12" font-family="Lato" font-size="14" fill="#333">${slice.name}</text>
+                <text x="25" y="28" font-family="Lato" font-size="12" fill="#666" font-weight="bold">${formatCurrency(slice.value)} (${percentage})</text>
+            </g>
+        `;
+
+        startAngle = endAngle;
     });
 
     return `
-        <svg width="100%" height="${chartHeight}" viewBox="0 0 ${chartWidth} ${chartHeight}" xmlns="http://www.w3.org/2000/svg">
-            ${svgContent}
+        <svg width="100%" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
+            ${paths}
+            <!-- Donut Hole (Optional, makes it look modern) -->
+            <circle cx="${cx}" cy="${cy}" r="${r * 0.5}" fill="white" />
+            ${legends}
         </svg>
     `;
 }
@@ -81,12 +93,16 @@ function generateQuotationHTML(data, templateHtml) {
         let itemsRows = '';
 
         zone.items.forEach(item => {
-            const total = item.qty * item.price;
+            const subtotal = item.qty * item.price;
+            const discountAmount = subtotal * (item.discount || 0);
+            const total = subtotal - discountAmount;
             const taxAmount = total * (item.tax || 0);
 
             zoneSubtotal += total;
             globalSubtotal += total;
             globalTax += taxAmount;
+
+            const discountText = item.discount ? `<span style="color: #d9534f;">-${(item.discount * 100).toFixed(0)}%</span>` : '-';
 
             itemsRows += `
                 <tr>
@@ -97,6 +113,7 @@ function generateQuotationHTML(data, templateHtml) {
                     <td class="col-unit">${item.unit}</td>
                     <td class="col-qty">${item.qty}</td>
                     <td class="col-price">${formatCurrency(item.price)}</td>
+                    <td class="col-discount">${discountText}</td>
                     <td class="col-total">${formatCurrency(total)}</td>
                 </tr>
             `;
@@ -115,6 +132,7 @@ function generateQuotationHTML(data, templateHtml) {
                             <th class="col-unit">Unidad</th>
                             <th class="col-qty">Cant.</th>
                             <th class="col-price">Precio Unit.</th>
+                            <th class="col-discount">Desc.</th>
                             <th class="col-total">Total</th>
                         </tr>
                     </thead>

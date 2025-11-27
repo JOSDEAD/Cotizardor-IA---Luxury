@@ -38,28 +38,35 @@ He incluido un `Dockerfile` para que puedas subirlo fácilmente a:
 
 ## 3. Configuración en n8n
 
-Ahora tu flujo en n8n es mucho más simple. Solo necesitas un nodo **HTTP Request**.
+Ahora tu flujo en n8n necesita **dos nodos**: uno para obtener el HTML y otro para convertirlo a PDF.
 
-### Nodo "HTTP Request"
+### Nodo 1: "HTTP Request" (Obtener HTML)
 *   **Method**: POST
-*   **URL**: `https://tu-dominio-api.com/api/quote` (o `http://localhost:3000/api/quote` si es local).
+*   **URL**: `https://tu-dominio-api.com/api/quote`
 *   **Body Content Type**: JSON
-*   **Body Parameters**:
-    *   Parameter Name: `zones`
-    *   Value: `{{ $json.zones }}` (y el resto de campos: clientName, reference, date).
-    *   *Tip: Puedes pasar todo el JSON que armaste en el paso anterior.*
-*   **Response Format**: File (Binary)
-*   **Property Name**: `data` (o como quieras llamar al archivo).
+*   **Body**: El JSON completo con clientName, reference, date, zones
+*   **Response Format**: String (Text)
 
-### Nodo "Slack"
+### Nodo 2: "HTML to PDF" 
+Usa uno de estos nodos para convertir el HTML a PDF:
+
+**Opción A: Gotenberg (Recomendado - Gratis)**
+- Puedes desplegar Gotenberg en Easypanel también (es solo un contenedor)
+- Imagen Docker: `gotenberg/gotenberg:8`
+- Endpoint: `POST http://gotenberg:3000/forms/chromium/convert/html`
+
+**Opción B: APITemplate.io**
+- Servicio de pago pero tiene plan gratuito
+- Más fácil de configurar
+
+**Opción C: Nodo nativo de n8n "HTML to PDF"** (si existe en tu versión)
+
+### Nodo 3: "Slack"
 Usa el nodo de Slack para subir el archivo PDF generado.
-
-*   **Resource**: File
-*   **Operation**: Upload
-*   **Binary Property**: `data` (la misma propiedad que definiste en el nodo HTTP).
 
 ## Resumen del Flujo
 1.  **Webhook / Slack Trigger**: Recibe la solicitud.
 2.  **AI Agent**: Procesa datos y crea el JSON.
-3.  **HTTP Request (Tu API)**: Envía JSON -> Recibe PDF.
-4.  **Slack**: Envía el PDF al usuario.
+3.  **HTTP Request (Tu API)**: Envía JSON → Recibe HTML.
+4.  **HTML to PDF**: Convierte HTML → PDF.
+5.  **Slack**: Envía el PDF al usuario.

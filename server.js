@@ -1,5 +1,4 @@
 const express = require('express');
-const puppeteer = require('puppeteer');
 const fs = require('fs');
 const path = require('path');
 const { generateQuotationHTML } = require('./generate_quote');
@@ -26,7 +25,7 @@ app.get('/health', (req, res) => {
     res.status(200).json({ status: 'ok' });
 });
 
-// POST /api/quote
+// POST /api/quote - Returns HTML (n8n will convert to PDF)
 app.post('/api/quote', async (req, res) => {
     try {
         const data = req.body;
@@ -35,53 +34,15 @@ app.post('/api/quote', async (req, res) => {
             return res.status(400).json({ error: 'Invalid data structure. "zones" is required.' });
         }
 
-        // 1. Generate HTML
+        // Generate HTML
         const finalHtml = generateQuotationHTML(data, templateHtml);
 
-        // 2. Launch Puppeteer
-        const browser = await puppeteer.launch({
-            headless: 'new',
-            args: [
-                '--no-sandbox',
-                '--disable-setuid-sandbox',
-                '--disable-dev-shm-usage',
-                '--disable-accelerated-2d-canvas',
-                '--no-first-run',
-                '--no-zygote',
-                '--disable-gpu'
-            ],
-            executablePath: '/usr/bin/google-chrome-stable'
-        });
-        const page = await browser.newPage();
-
-        // 3. Set Content
-        await page.setContent(finalHtml, { waitUntil: 'networkidle0' });
-
-        // 4. Generate PDF
-        const pdfBuffer = await page.pdf({
-            format: 'A4',
-            printBackground: true,
-            margin: {
-                top: '20mm',
-                bottom: '20mm',
-                left: '20mm',
-                right: '20mm'
-            }
-        });
-
-        await browser.close();
-
-        // 5. Send Response
-        res.set({
-            'Content-Type': 'application/pdf',
-            'Content-Length': pdfBuffer.length,
-            'Content-Disposition': `attachment; filename="cotizacion_${data.reference || 'draft'}.pdf"`
-        });
-
-        res.send(pdfBuffer);
+        // Return HTML
+        res.set('Content-Type', 'text/html');
+        res.send(finalHtml);
 
     } catch (error) {
-        console.error("Error generating PDF:", error);
+        console.error("Error generating HTML:", error);
         res.status(500).json({ error: 'Internal Server Error', details: error.message });
     }
 });

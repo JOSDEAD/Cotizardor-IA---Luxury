@@ -26,6 +26,7 @@ Esta opción permite que cada vez que hagas un cambio en el código, Easypanel a
 6.  **Configuración de Build**:
     *   Easypanel detectará automáticamente el `Dockerfile`.
     *   Asegúrate de que el "Build Type" sea **Dockerfile**.
+    *   **Ruta de compilación (Build Path)**: Pon `/` (ya que el Dockerfile está en la raíz).
 7.  **Configuración de Puerto**:
     *   En la sección "Network" o "Port", asegúrate de que esté escuchando en el puerto `3000` (que es el que definimos en el código).
 8.  Haz clic en **Create** o **Deploy**.

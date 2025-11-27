@@ -25,7 +25,7 @@ app.get('/health', (req, res) => {
     res.status(200).json({ status: 'ok' });
 });
 
-// POST /api/quote - Returns HTML (n8n will convert to PDF)
+// POST /api/quote - Returns PDF using Gotenberg
 app.post('/api/quote', async (req, res) => {
     try {
         const data = req.body;
@@ -34,15 +34,45 @@ app.post('/api/quote', async (req, res) => {
             return res.status(400).json({ error: 'Invalid data structure. "zones" is required.' });
         }
 
-        // Generate HTML
+        // 1. Generate HTML
         const finalHtml = generateQuotationHTML(data, templateHtml);
 
-        // Return HTML
-        res.set('Content-Type', 'text/html');
-        res.send(finalHtml);
+        // 2. Send HTML to Gotenberg for PDF conversion
+        const FormData = require('form-data');
+        const form = new FormData();
+
+        // Add HTML as a file
+        form.append('files', Buffer.from(finalHtml), {
+            filename: 'index.html',
+            contentType: 'text/html'
+        });
+
+        // Gotenberg configuration
+        const gotenbergUrl = process.env.GOTENBERG_URL || 'https://infrait-gotenberg.4fd8oo.easypanel.host';
+        const response = await fetch(`${gotenbergUrl}/forms/chromium/convert/html`, {
+            method: 'POST',
+            body: form,
+            headers: form.getHeaders()
+        });
+
+        if (!response.ok) {
+            throw new Error(`Gotenberg error: ${response.status} ${response.statusText}`);
+        }
+
+        // 3. Get PDF buffer from Gotenberg
+        const pdfBuffer = await response.arrayBuffer();
+
+        // 4. Send PDF to client
+        res.set({
+            'Content-Type': 'application/pdf',
+            'Content-Length': pdfBuffer.byteLength,
+            'Content-Disposition': `attachment; filename="cotizacion_${data.reference || 'draft'}.pdf"`
+        });
+
+        res.send(Buffer.from(pdfBuffer));
 
     } catch (error) {
-        console.error("Error generating HTML:", error);
+        console.error("Error generating PDF:", error);
         res.status(500).json({ error: 'Internal Server Error', details: error.message });
     }
 });

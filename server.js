@@ -41,21 +41,35 @@ app.post('/api/quote', async (req, res) => {
         const FormData = require('form-data');
         const form = new FormData();
 
-        // Add HTML as a file
+        // Add HTML as index.html file (Gotenberg requires this specific name)
         form.append('files', Buffer.from(finalHtml), {
             filename: 'index.html',
-            contentType: 'text/html'
+            contentType: 'text/html; charset=utf-8'
         });
+
+        // Add PDF options
+        form.append('marginTop', '0');
+        form.append('marginBottom', '0');
+        form.append('marginLeft', '0');
+        form.append('marginRight', '0');
+        form.append('printBackground', 'true');
 
         // Gotenberg configuration
         const gotenbergUrl = process.env.GOTENBERG_URL || 'https://infrait-gotenberg.4fd8oo.easypanel.host';
+
+        console.log('Sending request to Gotenberg:', gotenbergUrl);
+
         const response = await fetch(`${gotenbergUrl}/forms/chromium/convert/html`, {
             method: 'POST',
             body: form,
             headers: form.getHeaders()
         });
 
+        console.log('Gotenberg response status:', response.status);
+
         if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Gotenberg error response:', errorText);
             throw new Error(`Gotenberg error: ${response.status} ${response.statusText}`);
         }
 

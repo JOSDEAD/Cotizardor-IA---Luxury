@@ -21,6 +21,16 @@ try {
     process.exit(1);
 }
 
+// Load Logo as Base64
+const logoPath = path.join(__dirname, 'public', 'luxury.png');
+let logoBase64 = '';
+try {
+    const logoBuffer = fs.readFileSync(logoPath);
+    logoBase64 = `data:image/png;base64,${logoBuffer.toString('base64')}`;
+} catch (err) {
+    console.warn("Warning: Logo not found at public/luxury.png");
+}
+
 // Health check endpoint
 app.get('/health', (req, res) => {
     res.status(200).json({ status: 'ok' });
@@ -36,7 +46,7 @@ app.post('/api/quote', async (req, res) => {
         }
 
         // 1. Generate HTML
-        const finalHtml = generateQuotationHTML(data, templateHtml);
+        const finalHtml = generateQuotationHTML({ ...data, logoBase64 }, templateHtml);
 
         // 2. Send HTML to Gotenberg for PDF conversion
         const FormData = require('form-data');

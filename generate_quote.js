@@ -147,11 +147,23 @@ function generateQuotationHTML(data, templateHtml) {
     const globalTotal = globalSubtotal + globalTax;
     const chartSvg = generateSVGChart(data.zones);
 
+    // Conditional Company Field
+    const companyHtml = data.clientCompany ?
+        `<p id="client-company">${data.clientCompany}</p>` :
+        '';
+
+    // Logo Injection
+    const logoHtml = data.logoBase64 ?
+        `<img src="${data.logoBase64}" class="brand-logo" alt="Luxury Lights Logo">` :
+        '';
+
     // Replace placeholders in the template
     let finalHtml = templateHtml
+        .replace('<!-- Logo will be injected here -->', logoHtml)
         .replace('<span id="date">--/--/----</span>', data.date)
         .replace('<span id="ref">#0000</span>', data.reference)
         .replace('<p id="client-name">Nombre del Cliente</p>', data.clientName)
+        .replace('<p id="client-company">Empresa (Opcional)</p>', companyHtml)
         .replace('<!-- Zones will be injected here -->', zonesHtml)
         .replace('<span id="subtotal">₡0</span>', formatCurrency(globalSubtotal))
         .replace('<span id="tax">₡0</span>', formatCurrency(globalTax))

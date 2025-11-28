@@ -147,7 +147,20 @@ function generateQuotationHTML(data, templateHtml) {
     });
 
     const globalTotal = globalSubtotal + globalTax;
-    const chartSvg = generateSVGChart(data.zones);
+
+    // Conditional Chart Generation (Only if > 3 zones)
+    let chartSectionHtml = '';
+    if (data.zones.length > 3) {
+        const chartSvg = generateSVGChart(data.zones);
+        chartSectionHtml = `
+        <div class="page-break"></div>
+        <div class="chart-container">
+            <h2 class="chart-title">Análisis de Presupuesto por Zona</h2>
+            <div id="chart-placeholder">
+                ${chartSvg}
+            </div>
+        </div>`;
+    }
 
     // Conditional Company Field
     const companyHtml = data.clientCompany ?
@@ -178,7 +191,7 @@ function generateQuotationHTML(data, templateHtml) {
         .replace('<span id="subtotal">₡0</span>', formatCurrency(globalSubtotal))
         .replace('<span id="tax">₡0</span>', formatCurrency(globalTax))
         .replace('<span id="total">₡0</span>', formatCurrency(globalTotal))
-        .replace('<!-- SVG Chart will be injected here -->', chartSvg);
+        .replace('<!-- Chart Section -->', chartSectionHtml);
 
     return finalHtml;
 }

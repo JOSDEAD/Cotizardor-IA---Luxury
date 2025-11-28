@@ -87,6 +87,7 @@ function generateQuotationHTML(data, templateHtml) {
     let zonesHtml = '';
     let globalSubtotal = 0;
     let globalTax = 0;
+    let globalDiscount = 0;
 
     data.zones.forEach(zone => {
         let zoneSubtotal = 0;
@@ -101,6 +102,7 @@ function generateQuotationHTML(data, templateHtml) {
             zoneSubtotal += total;
             globalSubtotal += total;
             globalTax += taxAmount;
+            globalDiscount += discountAmount;
 
             const discountText = item.discount ? `<span style="color: #d9534f;">-${(item.discount * 100).toFixed(0)}%</span>` : '-';
 
@@ -157,6 +159,13 @@ function generateQuotationHTML(data, templateHtml) {
         `<img src="${data.logoBase64}" class="brand-logo" alt="Luxury Lights Logo">` :
         '';
 
+    // Conditional Discount Row
+    const discountHtml = globalDiscount > 0 ? `
+        <div class="row" style="color: #d9534f;">
+            <span>Descuento Total</span>
+            <span>-${formatCurrency(globalDiscount)}</span>
+        </div>` : '';
+
     // Replace placeholders in the template
     let finalHtml = templateHtml
         .replace('<!-- Logo will be injected here -->', logoHtml)
@@ -165,6 +174,7 @@ function generateQuotationHTML(data, templateHtml) {
         .replace('<p id="client-name">Nombre del Cliente</p>', data.clientName)
         .replace('<p id="client-company">Empresa (Opcional)</p>', companyHtml)
         .replace('<!-- Zones will be injected here -->', zonesHtml)
+        .replace('<!-- Discount Row -->', discountHtml)
         .replace('<span id="subtotal">₡0</span>', formatCurrency(globalSubtotal))
         .replace('<span id="tax">₡0</span>', formatCurrency(globalTax))
         .replace('<span id="total">₡0</span>', formatCurrency(globalTotal))

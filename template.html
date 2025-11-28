@@ -212,14 +212,13 @@
             font-family: 'Playfair Display', serif;
             font-size: 20px;
             font-weight: 700;
+            font-style: normal;
+            /* Ensure not italic */
             color: var(--primary-color);
         }
 
-        /* Remove bold from the total amount specifically */
-        .totals-table .row.final span:last-child {
-            font-weight: 400;
-            /* Normal weight */
-        }
+        /* Remove bold from the total amount specifically - REVERTED per user request */
+        /* User wants bold but not italic */
 
         /* Footer */
         footer {
@@ -321,6 +320,7 @@
 
         <div class="totals-section">
             <div class="totals-table">
+                <!-- Discount Row -->
                 <div class="row">
                     <span>Subtotal</span>
                     <span id="subtotal">₡0</span>

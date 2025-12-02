@@ -186,46 +186,7 @@
             align-items: flex-start;
         }
 
-        /* Fixed Header for Print */
-        .header-container {
-            background: white;
-        }
-
-        @media print {
-            .header-container {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                height: 220px;
-                /* Fixed height for header */
-                z-index: 1000;
-                background: white;
-                border-bottom: 2px solid var(--accent-color);
-            }
-
-            /* Add padding to body to prevent content overlap */
-            body {
-                padding-top: 240px;
-            }
-
-            /* Hide the original border from header since we moved it to container */
-            header {
-                border-bottom: none;
-                margin-bottom: 10px;
-            }
-
-            .client-info {
-                margin-bottom: 10px;
-            }
-        }
-
         /* Totals */
-        .footer-wrapper {
-            page-break-inside: avoid;
-            /* Keep totals and footer together */
-        }
-
         .totals-section {
             margin-top: 60px;
             display: flex;
@@ -329,31 +290,28 @@
 
 <body>
     <div class="container">
-        <!-- Header Container (Repeats on every page in print) -->
-        <div class="header-container">
-            <header>
-                <div class="header-left">
-                    <!-- Logo will be injected here -->
-                    <div class="logo">LUXURY <span>LIGHTS</span></div>
-                </div>
-                <div class="quote-meta">
-                    <h2>COTIZACIÓN</h2>
-                    <p><strong>Fecha:</strong> <span id="date">--/--/----</span></p>
-                    <p><strong>Ref:</strong> <span id="ref">#0000</span></p>
-                </div>
-            </header>
+        <header>
+            <div class="header-left">
+                <!-- Logo will be injected here -->
+                <div class="logo">LUXURY <span>LIGHTS</span></div>
+            </div>
+            <div class="quote-meta">
+                <h2>COTIZACIÓN</h2>
+                <p><strong>Fecha:</strong> <span id="date">--/--/----</span></p>
+                <p><strong>Ref:</strong> <span id="ref">#0000</span></p>
+            </div>
+        </header>
 
-            <div class="client-info">
-                <div class="info-block">
-                    <h3>Cliente</h3>
-                    <p id="client-name">Nombre del Cliente</p>
-                    <p id="client-company">Empresa (Opcional)</p>
-                </div>
-                <div class="info-block" style="text-align: right;">
-                    <h3>Emitido Por</h3>
-                    <p>Luxury Lights CR</p>
-                    <p>ventas@luxurylights.com</p>
-                </div>
+        <div class="client-info">
+            <div class="info-block">
+                <h3>Cliente</h3>
+                <p id="client-name">Nombre del Cliente</p>
+                <p id="client-company">Empresa (Opcional)</p>
+            </div>
+            <div class="info-block" style="text-align: right;">
+                <h3>Emitido Por</h3>
+                <p>Luxury Lights CR</p>
+                <p>ventas@luxurylights.com</p>
             </div>
         </div>
 
@@ -361,31 +319,29 @@
             <!-- Zones will be injected here -->
         </div>
 
-        <div class="footer-wrapper">
-            <div class="totals-section">
-                <div class="totals-table">
-                    <!-- Discount Row -->
-                    <div class="row">
-                        <span>Subtotal</span>
-                        <span id="subtotal">₡0</span>
-                    </div>
-                    <div class="row">
-                        <span>IVA (13%)</span>
-                        <span id="tax">₡0</span>
-                    </div>
-                    <div class="row final">
-                        <span>Total</span>
-                        <span id="total">₡0</span>
-                    </div>
+        <div class="totals-section">
+            <div class="totals-table">
+                <!-- Discount Row -->
+                <div class="row">
+                    <span>Subtotal</span>
+                    <span id="subtotal">₡0</span>
+                </div>
+                <div class="row">
+                    <span>IVA (13%)</span>
+                    <span id="tax">₡0</span>
+                </div>
+                <div class="row final">
+                    <span>Total</span>
+                    <span id="total">₡0</span>
                 </div>
             </div>
-
-            <footer>
-                <div class="signature">Iluminando tus espacios con elegancia</div>
-                <p>Gracias por su preferencia.</p>
-                <p>Este documento es una cotización preliminar y está sujeta a cambios.</p>
-            </footer>
         </div>
+
+        <footer>
+            <div class="signature">Iluminando tus espacios con elegancia</div>
+            <p>Gracias por su preferencia.</p>
+            <p>Este documento es una cotización preliminar y está sujeta a cambios.</p>
+        </footer>
 
         <!-- Chart Section -->
     </div>
